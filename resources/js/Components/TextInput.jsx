@@ -1,23 +1,56 @@
-import { forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef } from "react";
+// import "../../css/input.css";
+import PropTypes from "prop-types";
 
-export default forwardRef(function TextInput({ type = 'text', className = '', isFocused = false, ...props }, ref) {
-    const input = ref ? ref : useRef();
+const TextInput = forwardRef(
+    (
+        {
+            type = "text",
+            name,
+            id,
+            defaultValue,
+            variant = "primary",
+            placeholder = "",
+            isError,
+            className = "",
+            isFocused = false,
+            ...props
+        },
+        ref
+    ) => {
+        const inputRef = ref || useRef();
 
-    useEffect(() => {
-        if (isFocused) {
-            input.current.focus();
-        }
-    }, []);
-
-    return (
-        <input
-            {...props}
-            type={type}
-            className={
-                'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm ' +
-                className
+        useEffect(() => {
+            if (isFocused) {
+                inputRef.current.focus();
             }
-            ref={input}
-        />
-    );
-});
+        }, [isFocused]);
+
+        return (
+            <input
+                {...props}
+                type={type}
+                name={name}
+                id={id}
+                defaultValue={defaultValue}
+                className={`rounded-2xl bg-form-bg py-[13px] px-7 w-full input-${variant} ${
+                    isError ? "input-error" : ""
+                } ${className}`}
+                ref={inputRef}
+                placeholder={placeholder}
+            />
+        );
+    }
+);
+
+TextInput.propTypes = {
+    type: PropTypes.oneOf(["text", "password", "email", "number"]),
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    variant: PropTypes.oneOf(["primary", "error", "primary-outline"]),
+    placeholder: PropTypes.string,
+    isError: PropTypes.bool,
+    className: PropTypes.string,
+    isFocused: PropTypes.bool,
+};
+
+export default TextInput;
