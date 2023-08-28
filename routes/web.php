@@ -40,6 +40,10 @@ Route::prefix('prototype')->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('Prototype/Dashboard');
     })->name('prototype.dashboard');
+
+    Route::get('subscription', function () {
+        return Inertia::render('Prototype/Subscription');
+    })->name('prototype.subscription');
 });
 
 require __DIR__ . '/auth.php';
