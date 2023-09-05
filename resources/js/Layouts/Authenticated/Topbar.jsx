@@ -1,7 +1,8 @@
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import { Link } from "@inertiajs/react";
 import { useRef, useState } from "react";
 
-export default function Topbar() {
+export default function Topbar({ name }) {
     const [dropdownOpen, setdropdownOpen] = useState(true);
     const dropdownTarget = useRef();
 
@@ -21,7 +22,7 @@ export default function Topbar() {
             />
             <div className="flex items-center gap-4">
                 <span className="text-black text-sm font-medium">
-                    Welcome, Granola Sky
+                    Welcome, {name}
                 </span>
                 {/* <!-- user avatar --> */}
                 <div className="collapsible-dropdown flex flex-col gap-2 relative">
@@ -51,20 +52,14 @@ export default function Topbar() {
                         >
                             Settings
                         </a>
-                        {/* <a
-                            href="sign_in.html"
-                            className="transition-all hover:bg-sky-100 p-4"
-                        >
-                            Sign Out
-                        </a> */}
-                        <ResponsiveNavLink
+                        <Link
                             method="post"
                             href={route("logout")}
                             as="button"
-                            className="transition-all hover:bg-sky-100 p-4"
+                            className="transition-all hover:bg-sky-100 p-4 text-start"
                         >
                             Sign Out
-                        </ResponsiveNavLink>
+                        </Link>
                     </div>
                 </div>
             </div>
