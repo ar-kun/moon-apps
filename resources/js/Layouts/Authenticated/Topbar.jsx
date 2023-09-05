@@ -1,3 +1,4 @@
+import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { useRef, useState } from "react";
 
 export default function Topbar() {
@@ -50,12 +51,20 @@ export default function Topbar() {
                         >
                             Settings
                         </a>
-                        <a
+                        {/* <a
                             href="sign_in.html"
                             className="transition-all hover:bg-sky-100 p-4"
                         >
                             Sign Out
-                        </a>
+                        </a> */}
+                        <ResponsiveNavLink
+                            method="post"
+                            href={route("logout")}
+                            as="button"
+                            className="transition-all hover:bg-sky-100 p-4"
+                        >
+                            Sign Out
+                        </ResponsiveNavLink>
                     </div>
                 </div>
             </div>
